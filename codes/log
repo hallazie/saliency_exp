@@ -1,0 +1,77 @@
+[16:41:31] src/operator/././cudnn_algoreg-inl.h:106: Running performance tests to find the best convolution algorithm, this can take a while... (setting env variable MXNET_CUDNN_AUTOTUNE_DEFAULT to 0 to disable)
+WARNING:root:Already bound, ignoring bind()
+/usr/local/lib/python2.7/dist-packages/mxnet/module/base_module.py:464: UserWarning: Parameters already initialized and force_init=False. init_params call ignored.
+  allow_missing=allow_missing, force_init=force_init)
+INFO:root:Epoch[0] Batch [10]	Speed: 2.04 samples/sec	mse=2480.766246
+INFO:root:Epoch[0] Batch [20]	Speed: 2.04 samples/sec	mse=1960.033044
+INFO:root:Epoch[0] Batch [30]	Speed: 2.04 samples/sec	mse=1801.387390
+INFO:root:Epoch[0] Batch [40]	Speed: 2.03 samples/sec	mse=1711.494214
+INFO:root:Epoch[0] Batch [50]	Speed: 2.04 samples/sec	mse=1587.851733
+INFO:root:Epoch[0] Batch [60]	Speed: 2.04 samples/sec	mse=1409.284546
+INFO:root:Epoch[0] Train-mse=1380.944336
+INFO:root:Epoch[0] Time cost=243.466
+INFO:root:Saved checkpoint to "../params/deconv-0001.params"
+INFO:root:Epoch[1] Batch [10]	Speed: 2.04 samples/sec	mse=1448.752580
+INFO:root:Epoch[1] Batch [20]	Speed: 2.04 samples/sec	mse=1475.310999
+INFO:root:Epoch[1] Batch [30]	Speed: 2.04 samples/sec	mse=1331.215656
+INFO:root:Epoch[1] Batch [40]	Speed: 2.04 samples/sec	mse=1348.484546
+INFO:root:Epoch[1] Batch [50]	Speed: 2.04 samples/sec	mse=1381.902734
+INFO:root:Epoch[1] Batch [60]	Speed: 2.04 samples/sec	mse=1381.048389
+INFO:root:Epoch[1] Train-mse=918.972900
+INFO:root:Epoch[1] Time cost=243.093
+INFO:root:Saved checkpoint to "../params/deconv-0002.params"
+INFO:root:Epoch[2] Batch [10]	Speed: 2.04 samples/sec	mse=1385.584811
+INFO:root:Epoch[2] Batch [20]	Speed: 2.04 samples/sec	mse=1139.297998
+INFO:root:Epoch[2] Batch [30]	Speed: 2.04 samples/sec	mse=1227.702435
+INFO:root:Epoch[2] Batch [40]	Speed: 2.04 samples/sec	mse=1407.405548
+INFO:root:Epoch[2] Batch [50]	Speed: 2.04 samples/sec	mse=1217.338281
+INFO:root:Epoch[2] Batch [60]	Speed: 2.04 samples/sec	mse=1357.967383
+INFO:root:Epoch[2] Train-mse=1240.607422
+INFO:root:Epoch[2] Time cost=243.168
+INFO:root:Saved checkpoint to "../params/deconv-0003.params"
+INFO:root:Epoch[3] Batch [10]	Speed: 2.04 samples/sec	mse=1392.550204
+INFO:root:Epoch[3] Batch [20]	Speed: 2.04 samples/sec	mse=1162.075122
+INFO:root:Epoch[3] Batch [30]	Speed: 2.04 samples/sec	mse=1209.724261
+INFO:root:Epoch[3] Batch [40]	Speed: 2.04 samples/sec	mse=1222.248053
+INFO:root:Epoch[3] Batch [50]	Speed: 2.04 samples/sec	mse=1086.040546
+INFO:root:Epoch[3] Batch [60]	Speed: 2.04 samples/sec	mse=1143.178333
+INFO:root:Epoch[3] Train-mse=1299.933960
+INFO:root:Epoch[3] Time cost=243.073
+INFO:root:Saved checkpoint to "../params/deconv-0004.params"
+INFO:root:Epoch[4] Batch [10]	Speed: 2.04 samples/sec	mse=1295.404075
+INFO:root:Epoch[4] Batch [20]	Speed: 2.04 samples/sec	mse=1199.373999
+INFO:root:Epoch[4] Batch [30]	Speed: 2.04 samples/sec	mse=1166.342175
+INFO:root:Epoch[4] Batch [40]	Speed: 2.04 samples/sec	mse=1074.861292
+INFO:root:Epoch[4] Batch [50]	Speed: 2.04 samples/sec	mse=1186.230823
+INFO:root:Epoch[4] Batch [60]	Speed: 2.04 samples/sec	mse=1136.589130
+INFO:root:Epoch[4] Train-mse=1374.926514
+INFO:root:Epoch[4] Time cost=243.288
+INFO:root:Saved checkpoint to "../params/deconv-0005.params"
+INFO:root:Epoch[5] Batch [10]	Speed: 2.04 samples/sec	mse=1158.235363
+INFO:root:Epoch[5] Batch [20]	Speed: 2.04 samples/sec	mse=1127.128540
+INFO:root:Epoch[5] Batch [30]	Speed: 2.04 samples/sec	mse=1157.045135
+INFO:root:Epoch[5] Batch [40]	Speed: 2.04 samples/sec	mse=1262.882916
+INFO:root:Epoch[5] Batch [50]	Speed: 2.04 samples/sec	mse=1100.068060
+INFO:root:Epoch[5] Batch [60]	Speed: 2.04 samples/sec	mse=1084.539160
+INFO:root:Epoch[5] Train-mse=1011.980103
+INFO:root:Epoch[5] Time cost=243.104
+INFO:root:Saved checkpoint to "../params/deconv-0006.params"
+INFO:root:Epoch[6] Batch [10]	Speed: 2.04 samples/sec	mse=1264.006597
+INFO:root:Epoch[6] Batch [20]	Speed: 2.04 samples/sec	mse=1177.877264
+INFO:root:Epoch[6] Batch [30]	Speed: 2.04 samples/sec	mse=1124.746185
+INFO:root:Epoch[6] Batch [40]	Speed: 2.04 samples/sec	mse=1291.882642
+INFO:root:Epoch[6] Batch [50]	Speed: 2.04 samples/sec	mse=1220.173700
+INFO:root:Epoch[6] Batch [60]	Speed: 2.04 samples/sec	mse=1059.160077
+INFO:root:Epoch[6] Train-mse=917.789612
+INFO:root:Epoch[6] Time cost=243.118
+INFO:root:Saved checkpoint to "../params/deconv-0007.params"
+INFO:root:Epoch[7] Batch [10]	Speed: 2.04 samples/sec	mse=1128.050237
+INFO:root:Epoch[7] Batch [20]	Speed: 2.04 samples/sec	mse=1093.310602
+INFO:root:Epoch[7] Batch [30]	Speed: 2.04 samples/sec	mse=1151.945160
+INFO:root:Epoch[7] Batch [40]	Speed: 2.04 samples/sec	mse=1239.013898
+INFO:root:Epoch[7] Batch [50]	Speed: 2.04 samples/sec	mse=1087.078369
+INFO:root:Epoch[7] Batch [60]	Speed: 2.04 samples/sec	mse=1162.374622
+INFO:root:Epoch[7] Train-mse=1034.003174
+INFO:root:Epoch[7] Time cost=243.147
+INFO:root:Saved checkpoint to "../params/deconv-0008.params"
+INFO:root:Epoch[8] Batch [10]	Speed: 2.04 samples/sec	mse=1137.085438

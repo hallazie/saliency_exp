@@ -94,28 +94,29 @@ def deconv_net(is_train):
     conv_13 = mx.symbol.Convolution(data=actv_12, name='conv13', num_filter=512, kernel=(3,3), pad=(2,2), dilate=(2,2), weight=conv_13_weight, bias=conv_13_bias)
     norm_13 = mx.symbol.BatchNorm(data=conv_13, name='norm13')
     actv_13 = mx.symbol.Activation(data=norm_13, name='act13', act_type='relu')
-    # pool_13 = mx.symbol.Pooling(data=actv_13, name='pool13', stride=(1,1), kernel=(3,3), pad=(1,1), pool_type='avg')
+    pool_13 = mx.symbol.Pooling(data=actv_13, name='pool13', stride=(1,1), kernel=(3,3), pad=(1,1), pool_type='avg')
 
-    block = mx.symbol.BlockGrad(data=actv_13, name='block')
+    block = mx.symbol.BlockGrad(data=pool_13, name='block')
 
-    conv_h = mx.symbol.Convolution(data=actv_13, name='convh', num_filter=32, kernel=(3,3), dilate=(4,4), pad=(4,4))
+    conv_h = mx.symbol.Convolution(data=block, name='convh', num_filter=32, kernel=(7,7), pad=(3,3))
     norm_h = mx.symbol.BatchNorm(data=conv_h, name='normh')
     actv_h = mx.symbol.Activation(data=norm_h, name='acth', act_type='relu')
 
-    concat = mx.symbol.concat(block, actv_h)
-
-    conv_i = mx.symbol.Convolution(data=concat, name='convi', num_filter=128, kernel=(1,1))
+    conv_i = mx.symbol.Convolution(data=block, name='convi', num_filter=128, kernel=(1,1))
     norm_i = mx.symbol.BatchNorm(data=conv_i, name='normi')
     actv_i = mx.symbol.Activation(data=norm_i, name='acti', act_type='relu')
+
+    concat = mx.symbol.concat(actv_i, actv_h)
 
     # 512-512 40*30
     # decv_d = mx.symbol.Deconvolution(data=actv_i, name='decvd', num_filter=16, kernel=(4,4), stride=(4,4))
     # norm_d = mx.symbol.BatchNorm(data=decv_d, name='normd')
     # actv_d = mx.symbol.Activation(data=norm_d, name='actd', act_type='relu')
     
-    conv_o = mx.symbol.Convolution(data=actv_i, name='convo', num_filter=1, kernel=(1,1))
+    conv_o = mx.symbol.Convolution(data=concat, name='convo', num_filter=1, kernel=(1,1))
     norm_o = mx.symbol.BatchNorm(data=conv_o, name='normo')
     actv_o = mx.symbol.Activation(data=norm_o, name='acto', act_type='relu')
+    pool_o = mx.symbol.Pooling(data=actv_o, name='poolo', stride=(1,1), kernel=(3,3), pad=(1,1), pool_type='avg')
 
     max_ = mx.symbol.max(data=actv_o, axis=())
     min_ = mx.symbol.min(data=actv_o, axis=())
@@ -125,15 +126,16 @@ def deconv_net(is_train):
     div_ = mx.symbol.broadcast_div(lhs=up__, rhs=down)
     out = mx.symbol.broadcast_mul(lhs=tff_, rhs=div_)
 
-    opt1 = mx.symbol.broadcast_sub(out,label)
-    # opt2 = mx.symbol.broadcast_div(mx.symbol.abs(mx.symbol.broadcast_sub(out,label)),mx.symbol.full(shape=(1, OU_W, OU_H), val=2.0))
-    opt2 = mx.symbol.broadcast_div(mx.symbol.abs(mx.symbol.broadcast_sub(out,label)),lossfactor)
-    opt3 = mx.symbol.square(mx.symbol.broadcast_add(opt1,opt2))
-    loss = mx.symbol.MakeLoss(opt3)
-    # loss = mx.symbol.LinearRegressionOutput(data=out, label=label, name='loss')
+    #opt1 = mx.symbol.broadcast_sub(out,label)
+    ## opt2 = mx.symbol.broadcast_div(mx.symbol.abs(mx.symbol.broadcast_sub(out,label)),mx.symbol.full(shape=(1, OU_W, OU_H), val=2.0))
+    #opt2 = mx.symbol.broadcast_div(mx.symbol.abs(mx.symbol.broadcast_sub(out,label)),lossfactor)
+    #opt3 = mx.symbol.square(mx.symbol.broadcast_add(opt1,opt2))
+    #opt4 = mx.symbol.broadcast_div(opt3, mx.symbol.full(shape=(1, OU_W, OU_H), val=OU_W*OU_H))
+    #loss = mx.symbol.MakeLoss(opt4)
+    loss = mx.symbol.MAERegressionOutput(data=out, label=label, name='loss')
     if is_train:
         return loss
     else:
-        return out
+        return actv_o
 
 

@@ -59,15 +59,15 @@ class SaliencyIter(mx.io.DataIter):
                     img = np.array([img,img,img])
                 # batch[j] = img.reshape((3, self.data_width, self.data_height))
                 tmp_img = np.swapaxes(img, 0, 2)
-                if tmp_img.shape != (3,640,480):
-                    tmp_img.reshape((3,640,480))
+                if tmp_img.shape != (3,IN_W,IN_H):
+                    tmp_img.reshape((3,IN_W,IN_H))
                 batch[j] = tmp_img
             yield batch
     def label_iter(self, lst):
         for i in range(self.num_sample/self.batch_size):
             batch = mx.nd.zeros((self.batch_size, 1, self.label_width, self.label_height))
             for j in range(self.batch_size):
-                cur_fname = self.label_path+'/'+lst[i*self.batch_size+j].split('.')[0]+'.jpeg'
+                cur_fname = self.label_path+'/'+lst[i*self.batch_size+j].split('.')[0]+POST_FIX
                 img = np.array(Image.open(cur_fname).resize((self.label_width,self.label_height)))
                 img = np.array([img])
                 # batch[j] = img.reshape((1, self.label_width, self.label_height))

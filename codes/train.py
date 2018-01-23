@@ -16,28 +16,27 @@ logging.getLogger().setLevel(logging.DEBUG)
 def train():
 	
 	diter = dataiter.SaliencyIter()
-	# viter = dataiter.SaliencyValidateIter()
 	symbol = models.deconv_net(True)
 	arg_names = symbol.list_arguments()
 
-	model = mx.mod.Module(symbol=symbol, context=mx.gpu(), data_names=('data',), label_names=('label',))
+	model = mx.mod.Module(symbol=symbol, context=mx.gpu(0), data_names=('data',), label_names=('label',))
 	model.bind(data_shapes=diter.provide_data, label_shapes=diter.provide_label)
 	
-	# model.init_params(initializer=mx.init.Uniform(scale=.1))
-	# arg_params, aux_params = model.get_params()
-	# arg_params_load = mx.nd.load(VGG_PATH)
-	# for k in arg_params_load:
-	# 	if k in arg_names:
-	# 		arg_params[k] = arg_params_load[k]
-	# model.set_params(arg_params, aux_params, allow_missing=True)
-
-	sym, arg_params, aux_params = mx.model.load_checkpoint(MODEL_PREFIX, 1)
+	model.init_params(initializer=mx.init.Uniform(scale=.1))
+	arg_params, aux_params = model.get_params()
+	arg_params_load = mx.nd.load(VGG_PATH)
+	for k in arg_params_load:
+	 	if k in arg_names:
+	 		arg_params[k] = arg_params_load[k]
 	model.set_params(arg_params, aux_params, allow_missing=True)
+
+	#sym, arg_params, aux_params = mx.model.load_checkpoint(MODEL_PREFIX, 2)
+	#model.set_params(arg_params, aux_params, allow_missing=True)
 
 	model.fit(
 		diter,
 		optimizer = 'adam',
-		optimizer_params = {'learning_rate':0.005},
+		optimizer_params = {'learning_rate':0.01},
 		eval_metric = 'mse',
 		batch_end_callback = mx.callback.Speedometer(BATCH_SIZE, 10),
 		epoch_end_callback = mx.callback.do_checkpoint(MODEL_PREFIX, 1),
